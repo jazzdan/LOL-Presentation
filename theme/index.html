@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Colby - deck.js</title>
+	<meta name="viewport" content="width=1024, user-scalable=no">
+	
+	<!-- Replace path with correct path to deck.core.css. -->
+  <link rel="stylesheet" href="../core/deck.core.css" type="text/css">
+  <link rel="stylesheet" href="../themes/transition/horizontal-slide.css" type="text/css">
+  <link rel="stylesheet" href="../themes/style/colby.css" type="text/css">
+	
+	<!-- Any other extension CSS files go here. -->
+	
+	<!-- Replace path with correct path to Modernizr file. -->
+	<script src="../modernizr.custom.js"></script>
+
+</head>
+<body class="deck-container">
+
+<!-- for fools -->
+<section class="slide">
+
+    <div class="vcenter">
+        <h1 class="dark">></h1>
+        <h3>... use the arrows ...</h3>
+    </div>
+
+</section>
+
+<!-- this is a presentation -->
+<section class="slide">
+
+<h1>LOL Object Language</h1>
+</section>
+
+<section class="slide">
+<h1>Also known as...</h1>
+</section>
+
+<section class="slide">
+<h1>LOL</h1>
+</section>
+
+<!-- use pictures -->
+<section class="slide">
+
+	<img class="vcenter" src="lol.png" style="max-height: 70%;" />
+
+</section>
+
+
+<section class="slide">
+<h2>Authors</h2>
+<img style="float:left" src="colby.jpg" alt="Colby Dog"/>
+<img style="float:right;" src="dan.jpg" alt="Dan Dog"/>
+
+<p>Monday, May 7, 2011</p>
+</section>
+
+<section class="slide">
+<h2>Summary</h2>
+<p>LOL (pronounced “lawl”) is an object-oriented, dynamically typed programming language with an emphasis on asynchronous event-driven programming achieved through an implementation of the actor model.</p>
+</section>
+
+<!-- a block quote -->
+<section class="slide">
+
+	<h2>Motivation</h2>
+
+	<blockquote>If you want concurrency and have only objects, the best way is to commit suicide.<br/><cite>Prof. Christian Schulte on OO Concurrency</cite></blockquote>
+
+</section>
+
+<!-- make bullets -->
+<section class="slide">
+
+	<h2>Motivation</h2>
+
+	<ul>
+		<li class="slide">Object-Oriented Programming is great.</li>
+		<li class="slide">Erlang is great.</li>
+		<li class="slide">Wouldn't it be great to combine them together?</li>
+	</ul>
+
+</section>
+
+<section class="slide">
+
+<h2>Application Domains</h2>
+  <ul>
+    <li class="slide">Server-side Web Programming</li>
+    <li class="slide">Distributed Systems</li>
+    <li class="slide">Education</li>
+  </ul>
+
+</section>
+
+<section class="slide">
+
+<h2>Influences</h2>
+  <ul>
+    <li class="slide">JavaScript</li>
+    <li class="slide">Ruby</li>
+    <li class="slide">Erlang</li>
+  </ul>
+
+</section>
+
+<section class="slide">
+
+<h2>Basic Syntactic Features</h2>
+  <ul>
+    <li class="slide">Basic arithmetic operations</li>
+    <li class="slide">Variables</li>
+    <li class="slide">Comments</li>
+    <li class="slide">The if-then-else statement</li>
+  </ul>
+
+</section>
+
+<section class="slide">
+<h2>Data Types</h2>
+
+<ul>
+  <li class="slide">Boolean</li>
+  <li class="slide">Integer</li>
+  <li class="slide">Float</li>
+  <li class="slide">List</li>
+  <li class="slide">String (Represented internally as a List)</li>
+  <li class="slide"><i>All other data types are represented as objects!</i></li>
+</ul>
+</section>
+
+<section class="slide">
+<h2>Features for Reusability</h2>
+
+<ul>
+  <li class="slide">Functions</li>
+  <li class="slide">Anonymous functions(!)</li>
+  <li class="slide">Classes</li>
+  <li class="slide">Objects</li>
+</ul>
+</section>
+
+<section class="slide">
+<h2>Concurrency</h2>
+
+<ul>
+  <li class="slide">Actors</li>
+  <li class="slide">Message Passing</li>
+  <li class="slide">Receive Loops</li>
+</ul>
+
+</section>
+<!-- code -->
+<section class="slide">
+
+	<h2>Code Examples</h2>
+	<h3>Super basic stuff...</h3>
+<pre><code>test1 = “this is a string”
+test2 = 10
+
+func awesome:
+	return “this is awesome”
+end
+
+awesome = lambda:
+	return “this is awesome”
+end</code></pre>
+	
+</section>
+
+<section class="slide">
+
+	<h2>Code Examples</h2>
+	<h3>Objects</h3>
+<pre><code>lol coolobj:
+  # public property
+  this.prop = “public”
+
+  # private property
+  pivate_prop = “private”
+
+  # public method
+  this.get_private:
+	return private_prop
+  end
+
+end</code></pre>
+	
+</section>
+
+<section class="slide">
+
+	<h2>Code Examples</h2>
+	<h3>Calling an Object</h3>
+<pre><code>test = new coolobj
+
+echo test.prop
+#=> public
+
+echo test.private_prop
+#=> undefined
+
+echo test.get_private()
+#=> private</code></pre>
+	
+</section>
+
+<section class="slide">
+
+	<h2>Code Examples</h2>
+	<h3>Defining Actors</h3>
+<pre><code>
+lol Person:
+	this.name
+	
+	secret
+	
+	this.__constructor name, secret:
+		this.name = name
+		this.secret = secret
+	end
+	
+	this.get_secret:
+		return name + “ “ + secret
+	end
+
+	this.receive message, fromPid:
+		echo message
+		response = message + “... but it actually sucks.”
+		this.send(fromPid, response)
+	end
+
+end
+</code></pre>
+	
+</section>
+
+<section class="slide">
+
+	<h2>Code Examples</h2>
+	<h3>Using Actors</h3>
+<pre><code>
+dan = new Person(“dan”, “loves erlang”)
+colby = new Person(“colby”, “loves javascript”)
+
+pid1 = dan.start()
+pid2 = colby.start()
+
+dan.send(pid2, dan.get_secret))
+#=> “Dan loves erlang”
+#=> “Dan loves erlang... but it actually sucks.”
+#=> “Dan loves erlang... but it actually sucks. … but it actually sucks”
+#=> (infinitely!!!)
+</code></pre>
+	
+</section>
+
+<section class="slide">
+<h2>Language Evaluation Criteria</h2>
+<h3>Overall Simplicity</h3>
+<ul>
+  <li class="slide"></li>
+</ul>
+</section>
+
+<section class="slide">
+<h2>Language Evaluation Criteria</h2>
+<h3>Data Types and Structures</h3>
+<ul>
+  <li class="slide"></li>
+</ul>
+
+</section>
+
+<section class="slide">
+<h2>Language Evaluation Criteria</h2>
+<h3>Key Words</h3>
+<ul>
+  <li class="slide"></li>
+</ul>
+
+</section>
+
+
+</section>
+
+<section class="slide">
+<h2>Language Evaluation Criteria</h2>
+<h3>Orthogonality</h3>
+<ul>
+  <li class="slide"></li>
+</ul>
+
+</section>
+
+<section class="slide">
+<h2>Language Evaluation Criteria</h2>
+<h3>Form and Meaning</h3>
+<ul>
+  <li class="slide"></li>
+</ul>
+
+</section>
+
+<section class="slide">
+<h2>Language Evaluation Criteria</h2>
+<h3>Syntax Design</h3>
+<ul>
+  <li class="slide"></li>
+</ul>
+
+</section>
+
+<section class="slide">
+<h2>Language Evaluation Criteria</h2>
+<h3>Support for Abstraction</h3>
+<ul>
+  <li class="slide"></li>
+</ul>
+
+</section>
+
+<section class="slide">
+<h2>Language Evaluation Criteria</h2>
+<h3>Type Checking</h3>
+<ul>
+  <li class="slide"></li>
+</ul>
+
+</section>
+
+<section class="slide">
+<h2>Language Evaluation Criteria</h2>
+<h3>Exception Handling</h3>
+<ul>
+  <li class="slide"></li>
+</ul>
+
+</section>
+
+<section class="slide">
+<h2>Language Evaluation Criteria</h2>
+<h3>Restricted Aliasing</h3>
+<ul>
+  <li class="slide"></li>
+</ul>
+
+</section>
+
+
+<section class="slide">
+<h2>Credits>
+<h3>Special thanks to...</h3>
+<ul>
+  <li>Yukihiro "Matz" Matsumoto for teaching us how to make programmers happy with Ruby.</li>
+  <li>Douglas Crockford for defining what the "Good Parts" of JavaScript are.</li>
+  <li>Joe Armstrong for solving concurrency 20 years before people were even thinking about it.</li>
+</ul>
+</section>
+
+<!-- the end -->
+<section class="slide">
+
+	<div class="vcenter">
+		<h3>the end</h3>
+	</div>
+
+</section>
+
+<!-- Update these paths to point to the correct files. -->
+<script src="../jquery-1.7.min.js"></script>
+<script src="../core/deck.core.js"></script>
+
+<!-- Add any other extension JS files here -->
+
+
+<!-- Initialize the deck. You can put this in an external file if desired. -->
+<script>
+	$(function() {
+		$.deck('.slide');
+	});
+</script>
+
+<script type="text/javascript">
+  WebFontConfig = {
+    google: { families: [ 'Patua+One::latin' ] }
+  };
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+  })(); </script>
+
+</body>
+</html>
